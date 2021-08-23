@@ -2,6 +2,8 @@
 
 namespace App\Helper;
 
+use Illuminate\Support\Facades\Log;
+
 class Validation{
 
     public static function validateEmail(&$error,$body,$key,$required=false){
@@ -121,6 +123,13 @@ class Validation{
         }
 
         return $content;
+    }
+
+    public static function validateQueueHandleData($event){
+
+        $eventPayload = json_decode(json_encode($event));
+        return isset($eventPayload->payload) ? $eventPayload->payload : null;
+
     }
 
 }
