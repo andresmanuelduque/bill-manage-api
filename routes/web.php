@@ -14,3 +14,9 @@
 */
 
 $router->post('/bill/create', 'BillController@createBill');
+$router->post('/bill/list', 'BillController@listBill');
+$router->get('/bill/list/frequency/{frequency}', 'BillController@listBillByFrequency');
+
+$router->get('/user/balance', 'UserController@getBalance');
+
+
