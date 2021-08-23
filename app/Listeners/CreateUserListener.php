@@ -2,7 +2,6 @@
 
 namespace App\Listeners;
 
-use App\Events\CreateUserEvent;
 use App\Helper\Validation;
 use App\Services\User\CreateUserService;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -28,6 +27,8 @@ class CreateUserListener implements ShouldQueue
                 default:
                     Log::info("Invalid eventName");
             }
+        }else{
+            Log::info("Invalid $eventPayload");
         }
     }
 }

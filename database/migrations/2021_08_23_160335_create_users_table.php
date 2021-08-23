@@ -18,6 +18,7 @@ class CreateUsersTable extends Migration
             $table->string('firstName');
             $table->string('lastName');
             $table->string('email');
+            $table->float("balance")->default(0);
             $table->timestamps();
         });
     }
