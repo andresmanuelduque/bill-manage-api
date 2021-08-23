@@ -2,8 +2,11 @@
 
 namespace App\Services\Bill;
 
+use App\Mail\BillRequestMail;
 use App\Models\Bill;
 use App\Helper\Validation;
+use App\Models\User;
+use Illuminate\Support\Facades\Mail;
 
 
 class CreateBillService{
@@ -54,15 +57,15 @@ class CreateBillService{
         $bill->user_id = $userId;
         $bill->save();
 
-//        $user = User::find($userId);
+        $user = User::find($userId);
 
-//        $emailRequest = new \stdClass();
-//        $emailRequest->name = $user->firstName." ".$user->lastName;
-//        $emailRequest->type = $dte->item_type;
-//        $emailRequest->itemName = $dte->item_name;
-//        $emailRequest->amount = $dte->total_amount;
-//        $emailRequest->link = env("PAY_PAGE_URL").$dte->token;
-//        Mail::to($dte->email)->send(new DteRequestMail($emailRequest));
+        $emailRequest = new \stdClass();
+        $emailRequest->name = $user->firstName." ".$user->lastName;
+        $emailRequest->type = $bill->item_type;
+        $emailRequest->itemName = $bill->item_name;
+        $emailRequest->amount = $bill->total_amount;
+        $emailRequest->link = env("PAY_PAGE_URL").$bill->token;
+        Mail::to($bill->email)->send(new BillRequestMail($emailRequest));
 
         return $bill;
     }
