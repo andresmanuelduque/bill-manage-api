@@ -10,6 +10,8 @@ services:
       - .:/app
     depends_on:
       - bill_manage_api_db
+    networks:
+      - bill-network
   bill_manage_api_db:
     image: mysql:5.7.22
     environment:
@@ -21,3 +23,8 @@ services:
       - ./storage/dbdata:/var/lib/mysql
     ports:
       - 33071:3306
+    networks:
+      - bill-network
+networks:
+  bill-network:
+    external: true
