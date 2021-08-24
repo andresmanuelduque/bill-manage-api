@@ -13,6 +13,12 @@
 |
 */
 
-$router->get('/', function () use ($router) {
-    return $router->app->version();
-});
+$router->post('/bill/create', 'BillController@createBill');
+$router->post('/bill/list', 'BillController@listBill');
+$router->get('/bill/list/frequency/{frequency}', 'BillController@listBillByFrequency');
+$router->get('/bill/token/{token}','BillController@getBillByToken');
+$router->post('/bill/pay','BillController@payBill');
+
+$router->get('/user/balance', 'UserController@getBalance');
+
+
